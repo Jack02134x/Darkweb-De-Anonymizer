@@ -24,6 +24,19 @@ class Settings:
         "TracePoint/2.0 (+OSINT research demonstrator)"
     )
 
+    # Browser origins allowed to call the API (comma-separated). Set this
+    # to your deployed frontend URL, e.g. "https://my-app.vercel.app".
+    cors_origins: str = os.getenv(
+        "TRACEPOINT_CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173",
+    )
+
+    # Optional regex for origins, handy for Vercel preview URLs, e.g.
+    # "https://.*\\.vercel\\.app".
+    cors_origin_regex: str | None = (
+        os.getenv("TRACEPOINT_CORS_ORIGIN_REGEX") or None
+    )
+
     # Tor SOCKS proxy used for all .onion requests.
     tor_proxy: str = os.getenv(
         "TRACEPOINT_TOR_PROXY",

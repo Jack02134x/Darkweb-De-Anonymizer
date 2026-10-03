@@ -1,0 +1,8 @@
+frontend/
+.venv/
+venv/
+**/__pycache__/
+**/*.pyc
+backend/data/tracepoint.db
+.git/
+*.md

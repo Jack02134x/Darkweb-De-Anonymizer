@@ -1,0 +1,17 @@
+# Render Blueprint. In Render: New → Blueprint → pick this repo.
+# Render injects $PORT and builds from the repo-root Dockerfile.
+services:
+  - type: web
+    name: tracepoint-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      # Set this to your Vercel frontend URL after it is deployed,
+      # e.g. https://darkweb-de-anonymizer.vercel.app
+      - key: TRACEPOINT_CORS_ORIGINS
+        sync: false
+      # Optional: allow Vercel preview deployments too.
+      - key: TRACEPOINT_CORS_ORIGIN_REGEX
+        value: https://.*\.vercel\.app
