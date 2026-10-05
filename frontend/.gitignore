@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Local backend config for the on-PC demo — never commit this, so the
+# deployed site keeps pointing at Render.
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
