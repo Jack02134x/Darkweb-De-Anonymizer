@@ -5,6 +5,10 @@ import "./App.css";
 const API_BASE =
   import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000/api";
 
+// True when the UI is talking to a remote backend (the Render deploy)
+// rather than a local one. Used to show the free-tier notice.
+const IS_HOSTED = !/localhost|127\.0\.0\.1/.test(API_BASE);
+
 const NODE_COLORS = {
   username: "#2dd4bf",
   email: "#a78bfa",
@@ -858,6 +862,18 @@ export default function App() {
         </div>
       </header>
 
+      {/* Hosted-backend notice */}
+      {IS_HOSTED && (
+        <div className="hosting-note">
+          <span className="hosting-note-icon" aria-hidden="true">ⓘ</span>
+          <span>
+            This live demo's backend runs on <strong>Render's free
+            tier</strong>, so results are limited and searches are slower.
+            Run the project locally to see its full performance and data.
+          </span>
+        </div>
+      )}
+
       {/* Hero */}
       {!investigation && !loading && (
         <section className="hero">
@@ -959,7 +975,7 @@ export default function App() {
             </label>
 
             <span className="endpoint">
-              LOCAL ENGINE · {API_BASE}
+              {IS_HOSTED ? "HOSTED (RENDER FREE)" : "LOCAL ENGINE"} · {API_BASE}
             </span>
           </div>
         </div>
